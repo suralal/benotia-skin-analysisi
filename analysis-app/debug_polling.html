@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Polling Issue</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        button { padding: 10px 20px; margin: 10px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Debug Polling Issue</h1>
+    <button onclick="testPolling()">Test Polling</button>
+    <button onclick="clearLogs()">Clear Logs</button>
+    <div id="logs"></div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logsDiv = document.getElementById('logs');
+            const logDiv = document.createElement('div');
+            logDiv.className = `log ${type}`;
+            logDiv.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            logsDiv.appendChild(logDiv);
+            console.log(message);
+        }
+
+        function clearLogs() {
+            document.getElementById('logs').innerHTML = '';
+        }
+
+        async function testPolling() {
+            log('Starting polling test...', 'info');
+            
+            try {
+                // Create test image
+                const canvas = document.createElement('canvas');
+                canvas.width = 100;
+                canvas.height = 100;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'red';
+                ctx.fillRect(0, 0, 100, 100);
+                
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg'));
+                const landmarks = Array(468).fill([10, 10, 0]);
+                
+                const formData = new FormData();
+                formData.append('image', blob, 'test.jpg');
+                formData.append('landmarks', JSON.stringify(landmarks));
+                
+                log('Sending API request...', 'info');
+                
+                const response = await fetch('http://localhost:8000/v1/analysis', {
+                    method: 'POST',
+                    body: formData,
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                log(`Initial response: ${JSON.stringify(result)}`, 'info');
+                
+                if (result.status === 'processing') {
+                    log('Job is processing, starting to poll...', 'info');
+                    
+                    // Test the exact polling logic from the component
+                    let pollAttempts = 0;
+                    const maxPollAttempts = 30;
+                    
+                    const pollForResults = async () => {
+                        try {
+                            pollAttempts++;
+                            log(`Poll attempt ${pollAttempts}/${maxPollAttempts}`, 'info');
+                            
+                            const pollResponse = await fetch(`http://localhost:8000/v1/analysis/${result.job_id}`);
+                            log(`Poll response status: ${pollResponse.status}`, 'info');
+                            
+                            if (!pollResponse.ok) {
+                                throw new Error(`Poll request failed: ${pollResponse.status}`);
+                            }
+                            
+                            const pollResult = await pollResponse.json();
+                            log(`Poll result ${pollAttempts}: status=${pollResult.status}`, 'info');
+                            
+                            if (pollResult.status === 'done') {
+                                log('SUCCESS! Analysis completed!', 'success');
+                                log(`Final result: ${JSON.stringify(pollResult)}`, 'success');
+                                return; // Stop polling
+                                
+                            } else if (pollResult.status === 'error') {
+                                throw new Error(`Analysis failed: ${pollResult.message}`);
+                            }
+                            
+                            // Continue polling if still processing
+                            if (pollAttempts < maxPollAttempts) {
+                                log(`Scheduling next poll in 2 seconds...`, 'info');
+                                setTimeout(pollForResults, 2000);
+                            } else {
+                                log('ERROR: Maximum poll attempts reached', 'error');
+                            }
+                            
+                        } catch (pollError) {
+                            log(`Poll attempt ${pollAttempts} failed: ${pollError.message}`, 'error');
+                            // Don't re-throw, just log the error
+                        }
+                    };
+                    
+                    // Start polling
+                    log('Starting first poll in 2 seconds...', 'info');
+                    setTimeout(pollForResults, 2000);
+                    
+                } else if (result.status === 'done') {
+                    log('SUCCESS! Immediate result!', 'success');
+                } else {
+                    log(`ERROR: Unexpected status: ${result.status}`, 'error');
+                }
+                
+            } catch (error) {
+                log(`Error: ${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

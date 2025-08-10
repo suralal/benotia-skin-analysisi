@@ -1,0 +1,27 @@
+import { Header } from "./components/Header";
+import { HeroSection } from "./components/HeroSection";
+import { AIAnalysisSection } from "./components/AIAnalysisSection";
+import { ProductShowcase } from "./components/ProductShowcase";
+import { WhyBenotiaSection } from "./components/WhyBenotiaSection";
+import { TestimonialsSection } from "./components/TestimonialsSection";
+import { EducationHub } from "./components/EducationHub";
+import { Footer } from "./components/Footer";
+import { SkincareAssistant } from "./components/SkincareAssistant";
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-[#FDF9F3]">
+      <Header />
+      <main>
+        <HeroSection />
+        <AIAnalysisSection />
+        <ProductShowcase />
+        <WhyBenotiaSection />
+        <TestimonialsSection />
+        <EducationHub />
+      </main>
+      <Footer />
+      <SkincareAssistant />
+    </div>
+  );
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frontend-Backend Test</title>
+</head>
+<body>
+    <h1>Testing Frontend-Backend Communication</h1>
+    <button onclick="testAPI()">Test API Call</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                // Create a simple test image (1x1 pixel)
+                const canvas = document.createElement('canvas');
+                canvas.width = 100;
+                canvas.height = 100;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'red';
+                ctx.fillRect(0, 0, 100, 100);
+                
+                // Convert to blob
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg'));
+                
+                // Create test landmarks (468 points as expected by backend)
+                const landmarks = Array(468).fill([10, 10, 0]);
+                
+                // Create FormData
+                const formData = new FormData();
+                formData.append('image', blob, 'test.jpg');
+                formData.append('landmarks', JSON.stringify(landmarks));
+                
+                console.log('Sending request...');
+                resultDiv.innerHTML = 'Sending request...';
+                
+                // Make API call
+                const response = await fetch('http://localhost:8000/v1/analysis', {
+                    method: 'POST',
+                    body: formData,
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                console.log('Initial response:', result);
+                resultDiv.innerHTML = `Initial response: ${JSON.stringify(result, null, 2)}`;
+                
+                if (result.status === 'processing') {
+                    // Poll for results
+                    console.log('Polling for results...');
+                    resultDiv.innerHTML += '<br>Polling for results...';
+                    
+                    let attempts = 0;
+                    const maxAttempts = 10;
+                    
+                    while (attempts < maxAttempts) {
+                        attempts++;
+                        console.log(`Poll attempt ${attempts}`);
+                        resultDiv.innerHTML += `<br>Poll attempt ${attempts}`;
+                        
+                        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+                        
+                        try {
+                            const pollResponse = await fetch(`http://localhost:8000/v1/analysis/${result.job_id}`);
+                            if (pollResponse.ok) {
+                                const pollResult = await pollResponse.json();
+                                console.log(`Poll result ${attempts}:`, pollResult);
+                                resultDiv.innerHTML += `<br>Poll result ${attempts}: ${JSON.stringify(pollResult, null, 2)}`;
+                                
+                                if (pollResult.status === 'done') {
+                                    resultDiv.innerHTML += '<br><strong>SUCCESS! Analysis completed.</strong>';
+                                    return;
+                                } else if (pollResult.status === 'error') {
+                                    throw new Error(`Analysis failed: ${pollResult.message}`);
+                                }
+                                // Continue polling if still processing
+                            } else {
+                                throw new Error(`Poll request failed: ${pollResponse.status}`);
+                            }
+                        } catch (pollError) {
+                            console.error(`Poll attempt ${attempts} failed:`, pollError);
+                            resultDiv.innerHTML += `<br>Poll error ${attempts}: ${pollError.message}`;
+                        }
+                    }
+                    
+                    resultDiv.innerHTML += '<br><strong>ERROR: Polling timed out</strong>';
+                } else if (result.status === 'done') {
+                    resultDiv.innerHTML += '<br><strong>SUCCESS! Immediate result.</strong>';
+                } else {
+                    resultDiv.innerHTML += `<br><strong>ERROR: Unexpected status: ${result.status}</strong>`;
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
