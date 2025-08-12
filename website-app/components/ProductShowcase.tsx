@@ -10,7 +10,7 @@ export function ProductShowcase() {
   const [activeCategory, setActiveCategory] = useState("hyperpigmentation");
 
   const categories = [
-    { id: "hyperpigmentation", name: "Hyperpigmentation", color: "#D4AF37" },
+    { id: "hyperpigmentation", name: "Hyperpigmentation", color: "#8B6F47" },
     { id: "anti-acne", name: "Anti-Acne", color: "#8B6F47" },
     { id: "anti-aging", name: "Anti-Aging", color: "#6B5537" }
   ];
@@ -165,7 +165,7 @@ export function ProductShowcase() {
               onClick={() => setActiveCategory(category.id)}
               className={`px-8 py-3 rounded-full font-medium transition-all duration-300 smooth-hover ${
                 activeCategory === category.id
-                  ? 'bg-[#D4AF37] text-[#2C1810] shadow-lg transform scale-105'
+                  ? 'bg-[#8B6F47] text-white shadow-lg transform scale-105'
                   : 'bg-white text-[#5A4A3A] hover:bg-[#FDF9F3] border border-[#8B6F47]/20'
               }`}
             >
@@ -186,7 +186,7 @@ export function ProductShowcase() {
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-[#D4AF37] text-[#2C1810]">
+                    <Badge className="bg-[#8B6F47] text-white">
                       Save {Math.round(((parseFloat(product.originalPrice.replace('₹', '').replace(',', '')) - parseFloat(product.price.replace('₹', '').replace(',', ''))) / parseFloat(product.originalPrice.replace('₹', '').replace(',', ''))) * 100)}%
                     </Badge>
                   </div>
@@ -214,7 +214,7 @@ export function ProductShowcase() {
                             key={i}
                             className={`h-4 w-4 ${
                               i < Math.floor(product.rating)
-                                ? 'text-[#D4AF37] fill-current'
+                                ? 'text-[#8B6F47] fill-current'
                                 : 'text-gray-300'
                             }`}
                           />

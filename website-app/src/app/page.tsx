@@ -10,7 +10,7 @@ import { SkincareAssistant } from "../../components/SkincareAssistant";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#FDF9F3]">
+    <div className="min-h-screen bg-[#f5f1eb]">
       <Header />
       <main>
         <HeroSection />

@@ -42,7 +42,7 @@ export function AIAnalysisSection() {
   ];
 
   return (
-    <section id="ai-analysis" className="py-20 lg:py-32 bg-white">
+    <section id="ai-analysis" className="py-20 lg:py-32 bg-[#f5f1eb]">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -62,17 +62,17 @@ export function AIAnalysisSection() {
               <div key={index} className="relative group">
                 {/* Connector Line */}
                 {index < analysisSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-[#D4AF37] to-[#F5F1EB] z-0"></div>
+                  <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-[#8B6F47] to-[#F5F1EB] z-0"></div>
                 )}
                 
                 <div className="relative bg-[#FDF9F3] rounded-2xl p-8 smooth-hover hover:shadow-xl hover:-translate-y-2 border border-[#F5F1EB]">
                   {/* Step Number */}
-                  <div className="absolute -top-4 left-8 bg-[#D4AF37] text-[#2C1810] rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                  <div className="absolute -top-4 left-8 bg-[#8B6F47] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
                     {index + 1}
                   </div>
                   
                   <div className="space-y-4">
-                    <div className="w-16 h-16 bg-[#F5F1EB] rounded-full flex items-center justify-center group-hover:bg-[#D4AF37] transition-colors duration-300">
+                    <div className="w-16 h-16 bg-[#F5F1EB] rounded-full flex items-center justify-center group-hover:bg-[#8B6F47] transition-colors duration-300">
                       <IconComponent className="h-8 w-8 text-[#8B6F47] group-hover:text-[#2C1810]" />
                     </div>
                     
@@ -115,7 +115,7 @@ export function AIAnalysisSection() {
                   <div className="flex items-center space-x-2">
                     <div className="w-24 h-2 bg-[#F5F1EB] rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-[#D4AF37] to-[#B8941F] rounded-full transition-all duration-1000"
+                        className="h-full bg-gradient-to-r from-[#8B6F47] to-[#6B5A3A] rounded-full transition-all duration-1000"
                         style={{ width: `${item.value}%` }}
                       ></div>
                     </div>
@@ -127,7 +127,7 @@ export function AIAnalysisSection() {
 
             <Button 
               size="lg" 
-              className="bg-[#D4AF37] text-[#2C1810] hover:bg-[#B8941F] px-8 py-6 smooth-hover transform hover:scale-105"
+                              className="bg-[#8B6F47] text-white hover:bg-[#6B5A3A] px-8 py-6 smooth-hover transform hover:scale-105"
               onClick={() => window.open('http://localhost:3000', '_blank')}
             >
               Get Your Free Skin Report Today
@@ -160,7 +160,7 @@ export function AIAnalysisSection() {
                     className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-[#F5F1EB]"
                   />
                   <div className="mt-4">
-                    <div className="text-2xl font-bold text-[#D4AF37]">Overall Score: 72/100</div>
+                    <div className="text-2xl font-bold text-[#8B6F47]">Overall Score: 72/100</div>
                     <div className="text-[#5A4A3A]">Good skin health with room for improvement</div>
                   </div>
                 </div>
@@ -169,15 +169,15 @@ export function AIAnalysisSection() {
                   <h5 className="font-semibold text-[#2C1810] mb-3">Key Recommendations:</h5>
                   <ul className="space-y-2">
                     <li className="flex items-start space-x-2">
-                      <div className="w-2 h-2 bg-[#D4AF37] rounded-full mt-2 flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-[#8B6F47] rounded-full mt-2 flex-shrink-0"></div>
                       <span className="text-sm text-[#5A4A3A]">Use Vitamin C serum for pigmentation</span>
                     </li>
                     <li className="flex items-start space-x-2">
-                      <div className="w-2 h-2 bg-[#D4AF37] rounded-full mt-2 flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-[#8B6F47] rounded-full mt-2 flex-shrink-0"></div>
                       <span className="text-sm text-[#5A4A3A]">Increase hydration with hyaluronic acid</span>
                     </li>
                     <li className="flex items-start space-x-2">
-                      <div className="w-2 h-2 bg-[#D4AF37] rounded-full mt-2 flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-[#8B6F47] rounded-full mt-2 flex-shrink-0"></div>
                       <span className="text-sm text-[#5A4A3A]">Apply broad-spectrum SPF daily</span>
                     </li>
                   </ul>

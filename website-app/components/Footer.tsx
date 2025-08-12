@@ -52,9 +52,9 @@ export function Footer() {
               <Input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 bg-white/10 border-white/20 text-white placeholder-white/70 focus:border-[#D4AF37]"
+                className="flex-1 bg-white/10 border-white/20 text-white placeholder-white/70 focus:border-[#8B6F47]"
               />
-              <Button className="bg-[#D4AF37] text-[#2C1810] hover:bg-[#B8941F] px-8">
+                              <Button className="bg-[#8B6F47] text-white hover:bg-[#6B5A3A] px-8">
                 Subscribe
               </Button>
             </div>
@@ -86,11 +86,11 @@ export function Footer() {
                 {/* Contact Info */}
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <Mail className="h-5 w-5 text-[#D4AF37]" />
+                    <Mail className="h-5 w-5 text-[#8B6F47]" />
                     <span className="text-white/80">hello@benotia.com</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Phone className="h-5 w-5 text-[#D4AF37]" />
+                    <Phone className="h-5 w-5 text-[#8B6F47]" />
                     <span className="text-white/80">+91 80-4567-8900</span>
                   </div>
                   <div className="flex items-center space-x-3">

@@ -119,9 +119,9 @@ export function TestimonialsSection() {
                       <ImageWithFallback
                         src={testimonials[activeTestimonial].image}
                         alt={testimonials[activeTestimonial].name}
-                        className="w-32 h-32 rounded-full object-cover border-4 border-[#D4AF37]"
+                        className="w-32 h-32 rounded-full object-cover border-4 border-[#8B6F47]"
                       />
-                      <div className="absolute -top-2 -right-2 bg-[#D4AF37] rounded-full p-2">
+                                              <div className="absolute -top-2 -right-2 bg-[#8B6F47] rounded-full p-2">
                         <Quote className="h-6 w-6 text-[#2C1810]" />
                       </div>
                     </div>
@@ -130,7 +130,7 @@ export function TestimonialsSection() {
                   <div className="flex-1 text-center lg:text-left">
                     <div className="flex justify-center lg:justify-start mb-4">
                       {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 text-[#D4AF37] fill-current" />
+                        <Star key={i} className="h-5 w-5 text-[#8B6F47] fill-current" />
                       ))}
                     </div>
                     
@@ -145,7 +145,7 @@ export function TestimonialsSection() {
                       <p className="text-[#5A4A3A]">
                         Age {testimonials[activeTestimonial].age} • {testimonials[activeTestimonial].location}
                       </p>
-                      <div className="inline-block bg-[#D4AF37] text-[#2C1810] px-4 py-2 rounded-full text-sm font-medium">
+                      <div className="inline-block bg-[#8B6F47] text-white px-4 py-2 rounded-full text-sm font-medium">
                         {testimonials[activeTestimonial].results}
                       </div>
                     </div>
@@ -175,7 +175,7 @@ export function TestimonialsSection() {
                   key={index}
                   onClick={() => setActiveTestimonial(index)}
                   className={`w-3 h-3 rounded-full transition-colors ${
-                    index === activeTestimonial ? 'bg-[#D4AF37]' : 'bg-[#8B6F47]/30'
+                    index === activeTestimonial ? 'bg-[#8B6F47]' : 'bg-[#8B6F47]/30'
                   }`}
                 />
               ))}
@@ -224,7 +224,7 @@ export function TestimonialsSection() {
                     </div>
 
                     <div className="text-center">
-                      <div className="bg-[#D4AF37] text-[#2C1810] px-4 py-2 rounded-full text-sm font-medium inline-block mb-4">
+                      <div className="bg-[#8B6F47] text-white px-4 py-2 rounded-full text-sm font-medium inline-block mb-4">
                         {result.improvement}
                       </div>
                       <div className="space-y-1">
@@ -259,7 +259,7 @@ export function TestimonialsSection() {
                   <ImageWithFallback
                     src={doctor.image}
                     alt={doctor.name}
-                    className="w-20 h-20 rounded-full object-cover border-2 border-[#D4AF37]"
+                    className="w-20 h-20 rounded-full object-cover border-2 border-[#8B6F47]"
                   />
                 </div>
                 <div className="space-y-3">

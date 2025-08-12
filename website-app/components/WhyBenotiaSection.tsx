@@ -30,7 +30,7 @@ export function WhyBenotiaSection() {
   ];
 
   return (
-    <section id="why-benotia" className="py-20 lg:py-32 bg-white">
+    <section id="why-benotia" className="py-20 lg:py-32 bg-[#f5f1eb]">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -63,7 +63,7 @@ export function WhyBenotiaSection() {
                 
                 <div className="bg-[#F5F1EB] rounded-xl p-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-[#D4AF37]">50M+</div>
+                    <div className="text-2xl font-bold text-[#8B6F47]">50M+</div>
                     <div className="text-sm text-[#5A4A3A]">Skin analyses completed</div>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ export function WhyBenotiaSection() {
                   <h4 className="font-semibold text-[#2C1810]">State-of-the-art R&D Lab</h4>
                   <p className="text-sm text-[#5A4A3A]">Where innovation meets tradition</p>
                 </div>
-                <Award className="h-8 w-8 text-[#D4AF37]" />
+                <Award className="h-8 w-8 text-[#8B6F47]" />
               </div>
             </div>
           </div>
@@ -133,7 +133,7 @@ export function WhyBenotiaSection() {
             {/* Key Stats */}
             <div className="grid grid-cols-2 gap-6 pt-8 border-t border-[#F5F1EB]">
               <div className="text-center">
-                <div className="text-3xl font-bold text-[#D4AF37]">98%</div>
+                <div className="text-3xl font-bold text-[#8B6F47]">98%</div>
                 <div className="text-sm text-[#5A4A3A]">Customer satisfaction</div>
               </div>
               <div className="text-center">
@@ -159,7 +159,7 @@ export function WhyBenotiaSection() {
             {certifications.map((cert, index) => (
               <div key={index} className="text-center group">
                 <div className="bg-white rounded-2xl p-6 shadow-sm smooth-hover hover:shadow-lg hover:-translate-y-1 border border-[#F5F1EB]">
-                  <div className="w-12 h-12 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#B8941F] transition-colors">
+                  <div className="w-12 h-12 bg-[#8B6F47] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#6B5A3A] transition-colors">
                     <Shield className="h-6 w-6 text-[#2C1810]" />
                   </div>
                   <h4 className="font-semibold text-[#2C1810] mb-2 text-sm">{cert.name}</h4>

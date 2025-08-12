@@ -110,3 +110,35 @@ html {
 .gold-gradient {
   background: linear-gradient(135deg, var(--benotia-gold) 0%, var(--benotia-gold-muted) 100%);
 }
+
+/* Premium Header Styling */
+.premium-nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #8B6F47, #D4AF37);
+  transition: width 0.3s ease;
+}
+
+.premium-nav-link:hover::after {
+  width: 100%;
+}
+
+.premium-button {
+  background: linear-gradient(135deg, #8B6F47 0%, #6B5A3A 100%);
+  box-shadow: 0 4px 15px rgba(139, 111, 71, 0.3);
+  transition: all 0.3s ease;
+}
+
+.premium-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 111, 71, 0.4);
+}

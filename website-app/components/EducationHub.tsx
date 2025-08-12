@@ -71,7 +71,7 @@ export function EducationHub() {
   ];
 
   return (
-    <section id="education" className="py-20 lg:py-32 bg-white">
+    <section id="education" className="py-20 lg:py-32 bg-[#f5f1eb]">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
